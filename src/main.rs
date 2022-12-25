@@ -200,9 +200,61 @@ mod day3 {
     }
 }
 
+mod day4 {
+    pub fn part_1(input: &str) -> i64 {
+        let mut number_of_pair = 0;
+
+        for assignment_pair in input.lines() {
+            let (assignment1, assignement2) = assignment_pair.split_once(",").unwrap();
+
+            let (assignement1_1, assignement1_2) = assignment1.split_once("-").unwrap();
+            let (assignement2_1, assignement2_2) = assignement2.split_once("-").unwrap();
+
+            let assignement1_1: i64 = assignement1_1.parse().unwrap();
+            let assignement1_2: i64 = assignement1_2.parse().unwrap();
+            let assignement2_1: i64 = assignement2_1.parse().unwrap();
+            let assignement2_2: i64 = assignement2_2.parse().unwrap();
+
+            if (assignement1_1 <= assignement2_1 && assignement1_2 >= assignement2_2)
+                || (assignement2_1 <= assignement1_1 && assignement2_2 >= assignement1_2)
+            {
+                number_of_pair += 1;
+            }
+        }
+
+        number_of_pair
+    }
+
+    pub fn part_2(input: &str) -> i64 {
+        let mut number_of_pair = 0;
+
+        for assignment_pair in input.lines() {
+            let (assignment1, assignement2) = assignment_pair.split_once(",").unwrap();
+
+            let (assignement1_1, assignement1_2) = assignment1.split_once("-").unwrap();
+            let (assignement2_1, assignement2_2) = assignement2.split_once("-").unwrap();
+
+            let assignement1_1: i64 = assignement1_1.parse().unwrap();
+            let assignement1_2: i64 = assignement1_2.parse().unwrap();
+            let assignement2_1: i64 = assignement2_1.parse().unwrap();
+            let assignement2_2: i64 = assignement2_2.parse().unwrap();
+
+            let range1 = assignement1_1..assignement1_2;
+            let range2 = assignement2_1..assignement2_2;
+
+            if range1.start <= range2.end && range1.end >= range2.start {
+                number_of_pair += 1;
+            }
+        }
+
+        number_of_pair
+    }
+}
+
 aoc_main::main! {
     year 2022;
     day1 => part_1, part_2;
     day2 => part_1, part_2;
     day3 => part_1, part_2;
+    day4 => part_1, part_2;
 }
